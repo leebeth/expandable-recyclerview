@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@android:id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top|left"
+        android:gravity="center"
+        android:visibility="gone"
+        tools:ignore="RtlHardcoded" />
+
+    <LinearLayout
+        android:id="@+id/grid_row"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@color/bg_swipe_item_neutral"
+        android:clickable="false"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cell_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/continerViewLeft"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/custom_back_ground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="h,174:142"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
+                app:srcCompat="@drawable/ic_placeholder_producto">
+
+                <TextView
+                    android:id="@+id/productNameLeftTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/gotham_bold"
+                    android:gravity="center"
+                    android:maxLines="3"
+                    android:text="Nombre del producto"
+                    android:textColor="@color/colorGreenNew"
+                    android:textSize="11sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal2" />
+
+                <!--    <TextView
+                        android:id="@+id/productTimeLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="2dp"
+                        android:text="Tiempo faltante"
+                        android:textSize="9dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/productNameLeftTextView" />-->
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/guidelineHorizontal2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <TextView
+                    android:id="@+id/productTiemTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/gothamhtf_medium"
+                    android:gravity="center"
+                    android:maxLines="3"
+                    android:text="4 Días"
+                    android:textColor="@color/gray_light"
+                    android:textSize="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/productNameLeftTextView" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineHorizontalCoinDown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="104dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.59" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineHorizontalCoinUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.46" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.65" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineTest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.55" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/relativeLayout2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:elevation="12dp"
+                    android:innerRadius="0dp"
+                    android:shape="ring"
+                    android:thicknessRatio="1.9"
+                    app:cardCornerRadius="50dp">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorLightGray"
+                        app:srcCompat="@drawable/ic_placeholder_producto" />
+                </android.support.v7.widget.CardView>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutLeft"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/custom_background_yellow"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/relativeLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guidelineTest"
+                app:layout_constraintTop_toTopOf="@id/guidelineHorizontal">
+
+                <TextView
+                    android:id="@+id/dhylosLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="1dp"
+                    android:fontFamily="@font/gothamhtf_medium"
+                    android:text="Gana"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:id="@+id/dhylosTextViewLeft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/dhylosLabel"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/gotham_bold"
+                    android:text="-"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="13dp" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/guidelineHorizontalCoinDown"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintEnd_toEndOf="@id/continerViewLeft"
+                app:layout_constraintTop_toTopOf="@+id/guidelineHorizontalCoinUp"
+                app:srcCompat="@drawable/ic_coin_lista_producto" />
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="1dp"
+                app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalCoinDown"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@id/relativeLayoutLeft"
+                app:srcCompat="@drawable/ic_estrella_off_lista" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cell_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineHorizontalCoinDownRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="104dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.59" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineHorizontalCoinUpRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.46" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/continerViewRight"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/custom_back_ground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="h,174:142"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guidelineHorizontalRight"
+                app:srcCompat="@drawable/ic_placeholder_producto">
+
+                <TextView
+                    android:id="@+id/productNameRightTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/gotham_bold"
+                    android:gravity="center"
+                    android:maxLines="3"
+                    android:text="Nombre del producto"
+                    android:textColor="@color/colorGreenNew"
+                    android:textSize="11sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal2Right" />
+
+                <!--       <TextView
+                           android:id="@+id/productTimeRightLabel"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginEnd="8dp"
+                           android:layout_marginStart="8dp"
+                           android:layout_marginTop="2dp"
+                           android:text="Tiempo faltante"
+                           android:textSize="9dp"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toBottomOf="@+id/productNameRightTextView" />-->
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/guidelineHorizontal2Right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <TextView
+                    android:id="@+id/productTiemRightTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/gothamhtf_medium"
+                    android:gravity="center"
+                    android:maxLines="3"
+                    android:text="4 Días"
+
+                    android:textColor="@color/gray_light"
+                    android:textSize="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/productNameRightTextView" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineHorizontalRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.65" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineTestRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.55" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/relativeLayout2Right"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:elevation="12dp"
+                    android:innerRadius="0dp"
+                    android:shape="ring"
+                    android:thicknessRatio="1.9"
+                    app:cardCornerRadius="50dp">
+
+                    <ImageView
+                        android:id="@+id/imageViewRight"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorLightGray"
+                        app:srcCompat="@drawable/ic_placeholder_producto" />
+                </android.support.v7.widget.CardView>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutRight"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/custom_background_yellow"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/relativeLayout2Right"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guidelineTestRight"
+                app:layout_constraintTop_toTopOf="@id/guidelineHorizontalRight">
+
+                <TextView
+                    android:id="@+id/dhylosRightLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="1dp"
+                    android:fontFamily="@font/gothamhtf_medium"
+                    android:text="Gana"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:id="@+id/dhylosTextViewRight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/dhylosRightLabel"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/gotham_bold"
+                    android:text="-"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="13dp" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/guidelineHorizontalCoinDownRight"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintEnd_toEndOf="@id/continerViewRight"
+                app:layout_constraintTop_toTopOf="@+id/guidelineHorizontalCoinUpRight"
+                app:srcCompat="@drawable/ic_coin_lista_producto" />
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="1dp"
+                app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalCoinDownRight"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintEnd_toStartOf="@+id/imageView4"
+                app:layout_constraintTop_toBottomOf="@id/relativeLayoutRight"
+                app:srcCompat="@drawable/ic_estrella_off_lista" />
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
