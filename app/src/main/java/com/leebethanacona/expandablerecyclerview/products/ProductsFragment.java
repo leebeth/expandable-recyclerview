@@ -1,5 +1,6 @@
 package com.leebethanacona.expandablerecyclerview.products;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.leebethanacona.expandablerecyclerview.R;
 import com.leebethanacona.expandablerecyclerview.components.MyExpandableGroup;
 import com.leebethanacona.expandablerecyclerview.products.model.Product;
+import com.leebethanacona.expandablerecyclerview.stickyheader.StickHeaderItemDecoration;
 import com.thoughtbot.expandablerecyclerview.listeners.GroupExpandCollapseListener;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
@@ -54,6 +56,78 @@ public class ProductsFragment extends Fragment implements FragmentProductView {
         products = getProductsArray(productsFromServer);
         myExpandableGroups.add(new MyExpandableGroup("Viajes", products));
 
+        productsFromServer = getProductsFromServer("Destacados");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("aaa", products));
+
+        productsFromServer = getProductsFromServer("Electrodomesticos");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("bbb", products));
+
+        productsFromServer = getProductsFromServer("Helados");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("ccc", products));
+
+        productsFromServer = getProductsFromServer("Viajes");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("ddd", products));
+
+        productsFromServer = getProductsFromServer("Electrodomesticos");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("eee", products));
+
+        productsFromServer = getProductsFromServer("Helados");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("fff", products));
+
+        productsFromServer = getProductsFromServer("Viajes");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("ggg", products));
+
+        productsFromServer = getProductsFromServer("Viajes");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("hhh", products));
+
+        productsFromServer = getProductsFromServer("Electrodomesticos");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("iii", products));
+
+        productsFromServer = getProductsFromServer("Helados");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("jjj", products));
+
+        productsFromServer = getProductsFromServer("Viajes");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("kkk", products));
+
+        productsFromServer = getProductsFromServer("Viajes");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("lll", products));
+
+        productsFromServer = getProductsFromServer("Electrodomesticos");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("mmm", products));
+
+        productsFromServer = getProductsFromServer("Helados");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("nnn", products));
+
+        productsFromServer = getProductsFromServer("Viajes");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("ooo", products));
+
+        productsFromServer = getProductsFromServer("Electrodomesticos");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("qqq", products));
+
+        productsFromServer = getProductsFromServer("Helados");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("rrr", products));
+
+        productsFromServer = getProductsFromServer("Viajes");
+        products = getProductsArray(productsFromServer);
+        myExpandableGroups.add(new MyExpandableGroup("sss", products));
+
         //initialize recycler
         productsAdapter = new TuCashAdapter(myExpandableGroups, this);
         RecyclerView.ItemAnimator animator = recycler.getItemAnimator();
@@ -62,6 +136,7 @@ public class ProductsFragment extends Fragment implements FragmentProductView {
         }
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
         recycler.setAdapter(productsAdapter);
+        recycler.addItemDecoration(new StickHeaderItemDecoration(productsAdapter));
         productsAdapter.toggleGroup(0);
         productsAdapter.setLastIndexExpanded(0);
         return view;
@@ -145,5 +220,11 @@ public class ProductsFragment extends Fragment implements FragmentProductView {
             }
         };
         handler.postDelayed(r, 400);
+    }
+
+    @Nullable
+    @Override
+    public Context getContext() {
+        return super.getContext();
     }
 }

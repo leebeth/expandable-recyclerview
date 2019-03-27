@@ -9,8 +9,9 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.leebethanacona.expandablerecyclerview.products.ProductsFragment;
+import com.leebethanacona.expandablerecyclerview.stickyheader.StickyHeaderFragment;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.navigation_home:
                     break;
                 case R.id.navigation_dashboard:
+                    selectedFragment = new StickyHeaderFragment();
                     break;
                 case R.id.navigation_notifications:
                     selectedFragment = new ProductsFragment();
