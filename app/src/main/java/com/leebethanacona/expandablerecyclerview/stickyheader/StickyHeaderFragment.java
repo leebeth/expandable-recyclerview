@@ -3,6 +3,7 @@ package com.leebethanacona.expandablerecyclerview.stickyheader;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,10 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import com.leebethanacona.expandablerecyclerview.R;
 import com.leebethanacona.expandablerecyclerview.stickyheader.model.Category;
 import com.leebethanacona.expandablerecyclerview.stickyheader.model.Product;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,15 +25,28 @@ public class StickyHeaderFragment extends Fragment implements StickyHeaderView {
     private List<Category> categoryList;
     private ProductAdapter productAdapter;
     private RecyclerView recyclerView;
+    private View headerView;
+    private ImageView ivArrowHeader;
+    private Category category;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sticky_header, container, false);
-        this.recyclerView =  view.findViewById(R.id.productsRecyclerVIew);
+        this.recyclerView = view.findViewById(R.id.productsRecyclerVIew);
         initializeData();
         this.productAdapter = new ProductAdapter(this.categoryList, this);
         this.recyclerView.setAdapter(this.productAdapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         this.recyclerView.addItemDecoration(new StickHeaderItemDecoration(this.productAdapter));
+
+        headerView = view.findViewById(R.id.textView16);
+        headerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (category != null && ivArrowHeader != null)
+                    productAdapter.toggleHeader(ivArrowHeader, category);
+            }
+        });
+
         initializeExpand();
         return view;
     }
@@ -83,15 +100,25 @@ public class StickyHeaderFragment extends Fragment implements StickyHeaderView {
         }
     }
 
+    @Override
+    public void setVisibilityToHeader(boolean visible, ImageView ivArrowHeader, Category category) {
+        this.ivArrowHeader = ivArrowHeader;
+        this.category = category;
+        if (visible)
+            headerView.setVisibility(View.VISIBLE);
+        else
+            headerView.setVisibility(View.GONE);
+    }
+
     public void initializeExpand() {
         int i = 0;
         while (i < this.categoryList.size()) {
-            if (( this.categoryList.get(i)).isHeader() && ( this.categoryList.get(i)).isGroupExpanded()) {
+            if ((this.categoryList.get(i)).isHeader() && (this.categoryList.get(i)).isGroupExpanded()) {
                 int position = i;
-                if (!( this.categoryList.get(i)).getProductsList().isEmpty()) {
+                if (!(this.categoryList.get(i)).getProductsList().isEmpty()) {
                     position++;
-                    for (int j = 0; j < ( this.categoryList.get(i)).getProductsList().size(); j++) {
-                        this.categoryList.add(position + j, new Category( ( this.categoryList.get(i)).getProductsList().get(j)));
+                    for (int j = 0; j < (this.categoryList.get(i)).getProductsList().size(); j++) {
+                        this.categoryList.add(position + j, new Category((this.categoryList.get(i)).getProductsList().get(j)));
                     }
                 }
             }
@@ -107,13 +134,13 @@ public class StickyHeaderFragment extends Fragment implements StickyHeaderView {
         Product[] productArray2 = productArray;
         for (int i = 0; i < productsFromServer.size(); i++) {
             if (i % 2 == 0) {
-                productArray2[0] =  productsFromServer.get(i);
+                productArray2[0] = productsFromServer.get(i);
                 if (i == productsFromServer.size() - 1 && !mod) {
                     productArray2[1] = null;
                     products.add(productArray2);
                 }
             } else {
-                productArray2[1] =  productsFromServer.get(i);
+                productArray2[1] = productsFromServer.get(i);
                 products.add(productArray2);
                 productArray2 = new Product[2];
             }

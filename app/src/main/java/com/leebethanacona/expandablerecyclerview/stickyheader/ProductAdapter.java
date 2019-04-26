@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.leebethanacona.expandablerecyclerview.R;
 import com.leebethanacona.expandablerecyclerview.stickyheader.model.Category;
 import com.leebethanacona.expandablerecyclerview.stickyheader.model.Product;
+
 import java.util.List;
 
 public class ProductAdapter extends Adapter<ProductAdapter.MyViewHolder> implements StickyHeaderInterface {
@@ -36,16 +37,16 @@ public class ProductAdapter extends Adapter<ProductAdapter.MyViewHolder> impleme
 
         ChildViewHolder(View itemView) {
             super(itemView);
-            this.cell1 =  itemView.findViewById(R.id.cell_1);
-            this.cell2 =  itemView.findViewById(R.id.cell_2);
+            this.cell1 = itemView.findViewById(R.id.cell_1);
+            this.cell2 = itemView.findViewById(R.id.cell_2);
         }
     }
 
     class HeaderViewHolder extends MyViewHolder {
-        private TextView categoryTitle = ( this.itemView.findViewById(R.id.tvTittleHeader));
-        private ConstraintLayout constraintHeader = ( this.itemView.findViewById(R.id.constraintHeader));
+        private TextView categoryTitle = (this.itemView.findViewById(R.id.tvTittleHeader));
+        private ConstraintLayout constraintHeader = (this.itemView.findViewById(R.id.constraintHeaderLayout));
         private Context context = this.itemView.getContext();
-        private ImageView ivArrowHeader = ( this.itemView.findViewById(R.id.ivArrowHeader));
+        private ImageView ivArrowHeader = (this.itemView.findViewById(R.id.ivArrowHeader));
 
         HeaderViewHolder(View view) {
             super(view);
@@ -71,14 +72,14 @@ public class ProductAdapter extends Adapter<ProductAdapter.MyViewHolder> impleme
     }
 
     public final int getItemViewType(int position) {
-        if (( this.categoryList.get(position)).isHeader()) {
+        if ((this.categoryList.get(position)).isHeader()) {
             return HEADER;
         }
         return CHILD;
     }
 
     public boolean isHeader(int childAdapterPosition) {
-        return ( this.categoryList.get(childAdapterPosition)).isHeader();
+        return (this.categoryList.get(childAdapterPosition)).isHeader();
     }
 
     public boolean isHeaderExpanded(int topChildPosition) {
@@ -94,23 +95,23 @@ public class ProductAdapter extends Adapter<ProductAdapter.MyViewHolder> impleme
     }
 
     public void bindHeaderData(View header, final int headerPosition) {
-        TextView textView =  header.findViewById(R.id.tvTittleHeader);
+        TextView textView = header.findViewById(R.id.tvTittleHeader);
         if (textView != null) {
-            textView.setText(( this.categoryList.get(headerPosition)).getName());
+            textView.setText((this.categoryList.get(headerPosition)).getName());
         }
-        final ImageView ivArrowHeader =  header.findViewById(R.id.ivArrowHeader);
-        if (ivArrowHeader != null && ( this.categoryList.get(headerPosition)).isHeader()) {
-            if (( this.categoryList.get(headerPosition)).isGroupExpanded()) {
+        final ImageView ivArrowHeader = header.findViewById(R.id.ivArrowHeader);
+        if (ivArrowHeader != null && (this.categoryList.get(headerPosition)).isHeader()) {
+
+            stickyHeaderView.setVisibilityToHeader(true, ivArrowHeader, categoryList.get(headerPosition));
+
+            if ((this.categoryList.get(headerPosition)).isGroupExpanded()) {
                 this.stickyHeaderView.setExpandedIcon(true, ivArrowHeader);
             } else {
                 this.stickyHeaderView.setExpandedIcon(false, ivArrowHeader);
             }
-        }
-        header.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                ProductAdapter.this.toggleHeader(ivArrowHeader,  ProductAdapter.this.categoryList.get(headerPosition));
-            }
-        });
+        } else
+            stickyHeaderView.setVisibilityToHeader(false, ivArrowHeader, categoryList.get(headerPosition));
+
     }
 
     public int getHeaderPositionForItem(int itemPosition) {
@@ -134,9 +135,9 @@ public class ProductAdapter extends Adapter<ProductAdapter.MyViewHolder> impleme
     public void onBindViewHolder(@NonNull MyViewHolder holderBase, int position) {
         if (holderBase instanceof HeaderViewHolder) {
             final HeaderViewHolder holder = (HeaderViewHolder) holderBase;
-            final Category category =  this.categoryList.get(position);
-            holder.categoryTitle.setText(( this.categoryList.get(position)).getName());
-            if (( this.categoryList.get(position)).isGroupExpanded()) {
+            final Category category = this.categoryList.get(position);
+            holder.categoryTitle.setText((this.categoryList.get(position)).getName());
+            if ((this.categoryList.get(position)).isGroupExpanded()) {
                 holder.setIndicatorExpandCollapse(true);
             } else {
                 holder.setIndicatorExpandCollapse(false);
@@ -148,7 +149,7 @@ public class ProductAdapter extends Adapter<ProductAdapter.MyViewHolder> impleme
             });
         } else if (holderBase instanceof ChildViewHolder) {
             ChildViewHolder holder2 = (ChildViewHolder) holderBase;
-            final Product[] products = ( this.categoryList.get(position)).getProductArray();
+            final Product[] products = (this.categoryList.get(position)).getProductArray();
             ((TextView) holder2.cell1.findViewById(R.id.productNameLeftTextView)).setText(products[0].getName());
             holder2.cell1.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
@@ -179,7 +180,7 @@ public class ProductAdapter extends Adapter<ProductAdapter.MyViewHolder> impleme
         expand(category);
     }
 
-    private void toggleHeader(ImageView ivArrowHeader, Category category) {
+    public void toggleHeader(ImageView ivArrowHeader, Category category) {
         if (category.isGroupExpanded()) {
             this.stickyHeaderView.setExpandedIcon(false, ivArrowHeader);
             collapse(category);
@@ -191,21 +192,21 @@ public class ProductAdapter extends Adapter<ProductAdapter.MyViewHolder> impleme
 
     private void expand(Category category) {
         for (int i = 0; i < this.categoryList.size(); i++) {
-            if (( this.categoryList.get(i)).isHeader()) {
+            if ((this.categoryList.get(i)).isHeader()) {
                 if (category.getName().equals((this.categoryList.get(i)).getName())) {
-                    ( this.categoryList.get(i)).setGroupExpanded(true);
+                    (this.categoryList.get(i)).setGroupExpanded(true);
                     int position = i;
                     if (!category.getProductsList().isEmpty()) {
                         position++;
                         for (int j = 0; j < category.getProductsList().size(); j++) {
-                            this.categoryList.add(position + j, new Category( category.getProductsList().get(j)));
+                            this.categoryList.add(position + j, new Category(category.getProductsList().get(j)));
                         }
                     }
                     notifyItemRangeInserted(position, category.getProductsList().size());
-                } else if (( this.categoryList.get(i)).isGroupExpanded()) {
-                    ( this.categoryList.get(i)).setGroupExpanded(false);
+                } else if ((this.categoryList.get(i)).isGroupExpanded()) {
+                    (this.categoryList.get(i)).setGroupExpanded(false);
                     notifyItemChanged(i);
-                    collapse( this.categoryList.get(i));
+                    collapse(this.categoryList.get(i));
                 }
             }
         }
@@ -215,8 +216,8 @@ public class ProductAdapter extends Adapter<ProductAdapter.MyViewHolder> impleme
         boolean categoryFound = false;
         int i = 0;
         while (i < this.categoryList.size() && !categoryFound) {
-            if (( this.categoryList.get(i)).isHeader() && category.getName().equals(( this.categoryList.get(i)).getName())) {
-                ( this.categoryList.get(i)).setGroupExpanded(false);
+            if ((this.categoryList.get(i)).isHeader() && category.getName().equals((this.categoryList.get(i)).getName())) {
+                (this.categoryList.get(i)).setGroupExpanded(false);
                 categoryFound = true;
                 int position = i;
                 if (!category.getProductsList().isEmpty()) {
