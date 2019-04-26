@@ -1,34 +1,43 @@
 package com.leebethanacona.expandablerecyclerview.stickyheader.model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Category {
-    private String name;
-    private Product[] productList;
-    private int headerLayout;
     public int getViewType;
-    private boolean isHeader;
     private boolean groupExpanded;
+    private int headerLayout;
+    private boolean isHeader;
+    private String name;
+    private Product[] productArray;
+    private ArrayList<Product[]> productsList;
 
     public Category(Product[] productArray) {
-        this.productList = productArray;
+        this.productArray = productArray;
     }
 
-    public Category(String name) {
+    public Category(String name, ArrayList<Product[]> productsList) {
         this.name = name;
-        isHeader = true;
+        this.isHeader = true;
+        this.productsList = productsList;
     }
 
-    public Product[] getProductList() {
-        return productList;
+    public Category(String name, ArrayList<Product[]> productsList, boolean groupExpanded) {
+        this.name = name;
+        this.isHeader = true;
+        this.productsList = productsList;
+        this.groupExpanded = groupExpanded;
     }
 
-    public void setProductList(Product[] productList) {
-        this.productList = productList;
+    public Product[] getProductArray() {
+        return this.productArray;
+    }
+
+    public void setProductArray(Product[] productArray) {
+        this.productArray = productArray;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -36,18 +45,30 @@ public class Category {
     }
 
     public int getHeaderLayout() {
-        return headerLayout;
+        return this.headerLayout;
     }
 
     public boolean isHeader() {
-        return isHeader;
+        return this.isHeader;
     }
 
     public void setHeader(boolean header) {
-        isHeader = header;
+        this.isHeader = header;
     }
 
     public boolean isGroupExpanded() {
-        return groupExpanded;
+        return this.groupExpanded;
+    }
+
+    public ArrayList<Product[]> getProductsList() {
+        return this.productsList;
+    }
+
+    public void setProductsList(ArrayList<Product[]> productsList) {
+        this.productsList = productsList;
+    }
+
+    public void setGroupExpanded(boolean groupExpanded) {
+        this.groupExpanded = groupExpanded;
     }
 }

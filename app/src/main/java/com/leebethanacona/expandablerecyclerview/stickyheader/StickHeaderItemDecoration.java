@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 public class StickHeaderItemDecoration extends RecyclerView.ItemDecoration {
 
     private StickyHeaderInterface mListener;
-    private int mStickyHeaderHeight;
+    private int mStickyHeaderHeight = 50;
 
     public StickHeaderItemDecoration(StickyHeaderInterface mListener) {
         this.mListener = mListener;
@@ -50,14 +50,14 @@ public class StickHeaderItemDecoration extends RecyclerView.ItemDecoration {
 
     private void drawHeader(Canvas c, View header) {
         c.save();
-        c.translate(0, 0);
+        c.translate(0.0f, 0.0f);
         header.draw(c);
         c.restore();
     }
 
     private void moveHeader(Canvas c, View currentHeader, View nextHeader) {
         c.save();
-        c.translate(0, nextHeader.getTop() - currentHeader.getHeight());
+        c.translate(0.0f, (float) (nextHeader.getTop() - currentHeader.getHeight()));
         currentHeader.draw(c);
         c.restore();
     }
@@ -111,9 +111,8 @@ public class StickHeaderItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private View getHeaderViewForItem(int headerPosition, RecyclerView parent) {
-        int layoutResId = mListener.getHeaderLayout(headerPosition);
-        View header = LayoutInflater.from(parent.getContext()).inflate(layoutResId, parent, false);
-        mListener.bindHeaderData(header, headerPosition);
+        View header = LayoutInflater.from(parent.getContext()).inflate(this.mListener.getHeaderLayout(headerPosition), parent, false);
+        this.mListener.bindHeaderData(header, headerPosition);
         return header;
     }
 }

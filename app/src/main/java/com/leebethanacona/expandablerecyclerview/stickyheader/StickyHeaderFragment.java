@@ -1,92 +1,122 @@
 package com.leebethanacona.expandablerecyclerview.stickyheader;
 
-
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.leebethanacona.expandablerecyclerview.R;
-import com.leebethanacona.expandablerecyclerview.components.MyExpandableGroup;
 import com.leebethanacona.expandablerecyclerview.stickyheader.model.Category;
 import com.leebethanacona.expandablerecyclerview.stickyheader.model.Product;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class StickyHeaderFragment extends Fragment implements StickyHeaderView {
-
-
-    private RecyclerView recyclerView;
     private List<Category> categoryList;
+    private ProductAdapter productAdapter;
+    private RecyclerView recyclerView;
 
-    public StickyHeaderFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sticky_header, container, false);
-        recyclerView = view.findViewById(R.id.productsRecyclerVIew);
-
+        this.recyclerView =  view.findViewById(R.id.productsRecyclerVIew);
         initializeData();
-
-        ProductAdapter productAdapter = new ProductAdapter(categoryList, this);
-        recyclerView.setAdapter(productAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new StickHeaderItemDecoration(productAdapter));
+        this.productAdapter = new ProductAdapter(this.categoryList, this);
+        this.recyclerView.setAdapter(this.productAdapter);
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        this.recyclerView.addItemDecoration(new StickHeaderItemDecoration(this.productAdapter));
+        initializeExpand();
         return view;
     }
 
     private void initializeData() {
-
-        categoryList = new ArrayList<>();
-        categoryList.add(new Category("Destacados"));
-        getProductsArray(getProductsFromServer("Destacados"));
-
-        categoryList.add(new Category("Electrodomesticos"));
-        getProductsArray(getProductsFromServer("Electrodomesticos"));
-
-        categoryList.add(new Category("Helados"));
-        getProductsArray(getProductsFromServer("Helados"));
-
-        categoryList.add(new Category("Viajes"));
-        getProductsArray(getProductsFromServer("Viajes"));
-
+        this.categoryList = new ArrayList<>();
+        this.categoryList.add(new Category("Destacados", getProductsArray(getProductsFromServer("Destacados")), true));
+        this.categoryList.add(new Category("Electrodomesticos", getProductsArray(getProductsFromServer("Electrodomesticos"))));
+        this.categoryList.add(new Category("Helados", getProductsArray(getProductsFromServer("Helados"))));
+        this.categoryList.add(new Category("Viajes", getProductsArray(getProductsFromServer("Viajes"))));
+        this.categoryList.add(new Category("aaa", getProductsArray(getProductsFromServer("Destacados"))));
+        this.categoryList.add(new Category("bbb", getProductsArray(getProductsFromServer("Electrodomesticos"))));
+        this.categoryList.add(new Category("ccc", getProductsArray(getProductsFromServer("Helados"))));
+        this.categoryList.add(new Category("ddd", getProductsArray(getProductsFromServer("Viajes"))));
+        this.categoryList.add(new Category("eee", getProductsArray(getProductsFromServer("Destacados"))));
+        this.categoryList.add(new Category("fff", getProductsArray(getProductsFromServer("Electrodomesticos"))));
+        this.categoryList.add(new Category("ggg", getProductsArray(getProductsFromServer("Helados"))));
+        this.categoryList.add(new Category("hhh", getProductsArray(getProductsFromServer("Viajes"))));
+        this.categoryList.add(new Category("iii", getProductsArray(getProductsFromServer("Destacados"))));
+        this.categoryList.add(new Category("jjj", getProductsArray(getProductsFromServer("Electrodomesticos"))));
+        this.categoryList.add(new Category("kkk", getProductsArray(getProductsFromServer("Helados"))));
+        this.categoryList.add(new Category("lll", getProductsArray(getProductsFromServer("Viajes"))));
+        this.categoryList.add(new Category("mmm", getProductsArray(getProductsFromServer("Destacados"))));
+        this.categoryList.add(new Category("nnn", getProductsArray(getProductsFromServer("Electrodomesticos"))));
+        this.categoryList.add(new Category("ooo", getProductsArray(getProductsFromServer("Helados"))));
+        this.categoryList.add(new Category("ppp", getProductsArray(getProductsFromServer("Viajes"))));
+        this.categoryList.add(new Category("qqq", getProductsArray(getProductsFromServer("Viajes"))));
+        this.categoryList.add(new Category("rrr", getProductsArray(getProductsFromServer("Viajes"))));
+        this.categoryList.add(new Category("sss", getProductsArray(getProductsFromServer("Viajes"))));
+        this.categoryList.add(new Category("ttt", getProductsArray(getProductsFromServer("Viajes"))));
+        this.categoryList.add(new Category("uuu", getProductsArray(getProductsFromServer("Viajes"))));
+        this.categoryList.add(new Category("vvv", getProductsArray(getProductsFromServer("Viajes"))));
+        this.categoryList.add(new Category("www", getProductsArray(getProductsFromServer("Viajes"))));
+        this.categoryList.add(new Category("xxx", getProductsArray(getProductsFromServer("Viajes"))));
+        this.categoryList.add(new Category("yyy", getProductsArray(getProductsFromServer("Viajes"))));
+        this.categoryList.add(new Category("zzz", getProductsArray(getProductsFromServer("Viajes"))));
     }
 
-    @Override
     public void itemSelected(Product product) {
-        Toast.makeText(getContext(), "El producto seleccionado es: " + product.getName(), Toast.LENGTH_SHORT).show();
+        Context context = getContext();
+        String stringBuilder = "El producto seleccionado es: " +
+                product.getName();
+        Toast.makeText(context, stringBuilder, Toast.LENGTH_SHORT).show();
     }
 
+    public void setExpandedIcon(boolean expanded, ImageView ivArrowHeader) {
+        if (expanded) {
+            ivArrowHeader.setImageResource(R.drawable.btn_menos_producto);
+        } else {
+            ivArrowHeader.setImageResource(R.drawable.btn_mas_producto);
+        }
+    }
+
+    public void initializeExpand() {
+        int i = 0;
+        while (i < this.categoryList.size()) {
+            if (( this.categoryList.get(i)).isHeader() && ( this.categoryList.get(i)).isGroupExpanded()) {
+                int position = i;
+                if (!( this.categoryList.get(i)).getProductsList().isEmpty()) {
+                    position++;
+                    for (int j = 0; j < ( this.categoryList.get(i)).getProductsList().size(); j++) {
+                        this.categoryList.add(position + j, new Category( ( this.categoryList.get(i)).getProductsList().get(j)));
+                    }
+                }
+            }
+            i++;
+        }
+        this.productAdapter.notifyDataSetChanged();
+    }
 
     private ArrayList<Product[]> getProductsArray(ArrayList<Product> productsFromServer) {
         ArrayList<Product[]> products = new ArrayList<>();
         Product[] productArray = new Product[2];
         boolean mod = productsFromServer.size() % 2 == 0;
+        Product[] productArray2 = productArray;
         for (int i = 0; i < productsFromServer.size(); i++) {
             if (i % 2 == 0) {
-                productArray[0] = productsFromServer.get(i);
+                productArray2[0] =  productsFromServer.get(i);
                 if (i == productsFromServer.size() - 1 && !mod) {
-                    productArray[1] = null;
-                    categoryList.add(new Category(productArray));
+                    productArray2[1] = null;
+                    products.add(productArray2);
                 }
             } else {
-                productArray[1] = productsFromServer.get(i);
-                categoryList.add(new Category(productArray));
-                productArray = new Product[2];
+                productArray2[1] =  productsFromServer.get(i);
+                products.add(productArray2);
+                productArray2 = new Product[2];
             }
-
         }
         return products;
     }
@@ -131,6 +161,5 @@ public class StickyHeaderFragment extends Fragment implements StickyHeaderView {
             products.add(new Product("Cauca"));
         }
         return products;
-
     }
 }

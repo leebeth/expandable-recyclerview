@@ -3,13 +3,13 @@ package com.leebethanacona.expandablerecyclerview.stickyheader;
 import android.view.View;
 
 public interface StickyHeaderInterface {
-    int getHeaderPositionForItem(int topChildPosition);
+    void bindHeaderData(View view, int i);
 
-    int getHeaderLayout(int headerPosition);
+    int getHeaderLayout(int i);
 
-    void bindHeaderData(View header, int headerPosition);
+    int getHeaderPositionForItem(int i);
 
-    boolean isHeader(int childAdapterPosition);
+    boolean isHeader(int i);
 
-    boolean isHeaderExpanded(int topChildPosition);
+    boolean isHeaderExpanded(int i);
 }

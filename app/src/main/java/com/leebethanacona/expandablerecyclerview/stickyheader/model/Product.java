@@ -1,7 +1,6 @@
 package com.leebethanacona.expandablerecyclerview.stickyheader.model;
 
 public class Product {
-
     private final String name;
 
     public Product(String name) {
@@ -9,7 +8,6 @@ public class Product {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
-
 }
