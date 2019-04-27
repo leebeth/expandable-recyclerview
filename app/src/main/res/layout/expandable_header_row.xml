@@ -44,6 +44,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView16"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_mas_producto" />
+        app:srcCompat="@drawable/btn_menos_producto" />
 
 </android.support.constraint.ConstraintLayout>

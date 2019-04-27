@@ -3,7 +3,6 @@ package com.leebethanacona.expandablerecyclerview.stickyheader;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +27,7 @@ public class StickyHeaderFragment extends Fragment implements StickyHeaderView {
     private View headerView;
     private ImageView ivArrowHeader;
     private Category category;
+    private TextView textHeader;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sticky_header, container, false);
@@ -38,12 +38,14 @@ public class StickyHeaderFragment extends Fragment implements StickyHeaderView {
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         this.recyclerView.addItemDecoration(new StickHeaderItemDecoration(this.productAdapter));
 
-        headerView = view.findViewById(R.id.textView16);
+        headerView = view.findViewById(R.id.includeHeader);
+        textHeader = view.findViewById(R.id.tvTittleHeader);
         headerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (category != null && ivArrowHeader != null)
-                    productAdapter.toggleHeader(ivArrowHeader, category);
+                if (category != null && ivArrowHeader != null) {
+                    productAdapter.toggleHeader(ivArrowHeader, textHeader, category);
+                }
             }
         });
 
@@ -101,9 +103,10 @@ public class StickyHeaderFragment extends Fragment implements StickyHeaderView {
     }
 
     @Override
-    public void setVisibilityToHeader(boolean visible, ImageView ivArrowHeader, Category category) {
+    public void setVisibilityToHeader(boolean visible, TextView textView, ImageView ivArrowHeader, Category category) {
         this.ivArrowHeader = ivArrowHeader;
         this.category = category;
+        textHeader.setText(category.getName());
         if (visible)
             headerView.setVisibility(View.VISIBLE);
         else
@@ -153,12 +156,12 @@ public class StickyHeaderFragment extends Fragment implements StickyHeaderView {
         if ("Destacados".equalsIgnoreCase(nameCategory)) {
             products.add(new Product("Sandalias"));
             products.add(new Product("Camisas"));
-            products.add(new Product("Sacos"));
-            products.add(new Product("Tacones"));
+           // products.add(new Product("Sacos"));
+            //products.add(new Product("Tacones"));
         } else if ("Electrodomesticos".equalsIgnoreCase(nameCategory)) {
             products.add(new Product("Lavadora"));
             products.add(new Product("Computador"));
-            products.add(new Product("Televisor"));
+           /** products.add(new Product("Televisor"));
             products.add(new Product("Teatro en casa"));
             products.add(new Product("Estufa"));
             products.add(new Product("Horno"));
@@ -166,7 +169,7 @@ public class StickyHeaderFragment extends Fragment implements StickyHeaderView {
             products.add(new Product("Secadora"));
             products.add(new Product("Horno microondas"));
             products.add(new Product("Plancha"));
-            products.add(new Product("Portatil"));
+            products.add(new Product("Portatil"));**/
         } else if ("Helados".equalsIgnoreCase(nameCategory)) {
             products.add(new Product("Paleta"));
             products.add(new Product("Helado"));

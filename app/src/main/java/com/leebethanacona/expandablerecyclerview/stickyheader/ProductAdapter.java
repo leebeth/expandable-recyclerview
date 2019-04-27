@@ -101,17 +101,14 @@ public class ProductAdapter extends Adapter<ProductAdapter.MyViewHolder> impleme
         }
         final ImageView ivArrowHeader = header.findViewById(R.id.ivArrowHeader);
         if (ivArrowHeader != null && (this.categoryList.get(headerPosition)).isHeader()) {
-
-            stickyHeaderView.setVisibilityToHeader(true, ivArrowHeader, categoryList.get(headerPosition));
-
             if ((this.categoryList.get(headerPosition)).isGroupExpanded()) {
-                this.stickyHeaderView.setExpandedIcon(true, ivArrowHeader);
+                ivArrowHeader.setImageResource(R.drawable.btn_menos_producto);
+                stickyHeaderView.setVisibilityToHeader(true, textView, ivArrowHeader, categoryList.get(headerPosition));
             } else {
-                this.stickyHeaderView.setExpandedIcon(false, ivArrowHeader);
+                ivArrowHeader.setImageResource(R.drawable.btn_mas_producto);
+                stickyHeaderView.setVisibilityToHeader(false, textView, ivArrowHeader, categoryList.get(headerPosition));
             }
-        } else
-            stickyHeaderView.setVisibilityToHeader(false, ivArrowHeader, categoryList.get(headerPosition));
-
+        }
     }
 
     public int getHeaderPositionForItem(int itemPosition) {
@@ -172,21 +169,21 @@ public class ProductAdapter extends Adapter<ProductAdapter.MyViewHolder> impleme
 
     private void toggleHeader(HeaderViewHolder holder, Category category) {
         if (category.isGroupExpanded()) {
-            this.stickyHeaderView.setExpandedIcon(false, holder.ivArrowHeader);
+            //this.stickyHeaderView.setExpandedIcon(false, holder.ivArrowHeader);
             collapse(category);
             return;
         }
-        this.stickyHeaderView.setExpandedIcon(true, holder.ivArrowHeader);
+        //this.stickyHeaderView.setExpandedIcon(true, holder.ivArrowHeader);
         expand(category);
     }
 
-    public void toggleHeader(ImageView ivArrowHeader, Category category) {
+    public void toggleHeader(ImageView ivArrowHeader, TextView textHeader, Category category) {
         if (category.isGroupExpanded()) {
-            this.stickyHeaderView.setExpandedIcon(false, ivArrowHeader);
+            // this.stickyHeaderView.setExpandedIcon(false, ivArrowHeader);
             collapse(category);
             return;
         }
-        this.stickyHeaderView.setExpandedIcon(true, ivArrowHeader);
+        //this.stickyHeaderView.setExpandedIcon(true, ivArrowHeader);
         expand(category);
     }
 
@@ -196,6 +193,7 @@ public class ProductAdapter extends Adapter<ProductAdapter.MyViewHolder> impleme
                 if (category.getName().equals((this.categoryList.get(i)).getName())) {
                     (this.categoryList.get(i)).setGroupExpanded(true);
                     int position = i;
+                    notifyItemChanged(i);
                     if (!category.getProductsList().isEmpty()) {
                         position++;
                         for (int j = 0; j < category.getProductsList().size(); j++) {
@@ -218,6 +216,7 @@ public class ProductAdapter extends Adapter<ProductAdapter.MyViewHolder> impleme
         while (i < this.categoryList.size() && !categoryFound) {
             if ((this.categoryList.get(i)).isHeader() && category.getName().equals((this.categoryList.get(i)).getName())) {
                 (this.categoryList.get(i)).setGroupExpanded(false);
+                notifyItemChanged(i);
                 categoryFound = true;
                 int position = i;
                 if (!category.getProductsList().isEmpty()) {
